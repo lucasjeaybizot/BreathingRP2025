@@ -1,12 +1,11 @@
 # BreathingRP2025
 This repository contains the code for Jeay-Bizot et al. (2025) Matters Arising following Park et al. (2020) article.
 
-```markdown
 
-## Repository Structure
 
-```
+### Repository Structure
 
+````
 .
 ├── binning\_corrected.m
 ├── binning\_original.m
@@ -96,7 +95,7 @@ Run the generate_simulateddata.m script to populate data\simulated\processed.
 
 * MATLAB R2020b or later
 * FieldTrip toolbox (latest version from [https://www.fieldtriptoolbox.org](https://www.fieldtriptoolbox.org))
-* circ_stat toolbox
+* circ_stat toolbox (latest version from [https://www.mathworks.com/matlabcentral/fileexchange/10676-circular-statistics-toolbox-directional-statistics](https://www.mathworks.com/matlabcentral/fileexchange/10676-circular-statistics-toolbox-directional-statistics))
 
 ---
 
