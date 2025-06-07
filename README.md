@@ -84,7 +84,7 @@ You can download the `data/new/raw` from our OSF project:
 
 ### Accessing Restricted Data
 
-To obtain the original dataset from Park et al. (2020), please contact the authors of that study directly. Our analysis scripts are compatible with either the `new` or `simulated` datasets.
+To obtain the original dataset from Park et al. (2020), please contact the authors of that study directly.
 
 ### Generating simulated data
 
