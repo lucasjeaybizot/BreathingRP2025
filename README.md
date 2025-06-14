@@ -79,7 +79,7 @@ The dataset used in this project consists of:
 
 You can download the `data/new/raw` from our OSF project:
 
-[https://osf.io/3cvyk/?view_only=e02aa800fc5d40a082ebd2c862f768c0](https://osf.io/3cvyk/?view_only=e02aa800fc5d40a082ebd2c862f768c0)](https://osf.io/3cvyk/)
+[https://osf.io/3cvyk/](https://osf.io/3cvyk/)
 
 ### Accessing Restricted Data
 
