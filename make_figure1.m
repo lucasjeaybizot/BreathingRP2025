@@ -55,7 +55,7 @@ polarplot(circ_mean(individual_phases'), (r)*ones(size(individual_phases)), 'o',
 text(0.5,1.2,'Behavioral coupling','Units','normalized','Rotation',0,'HorizontalAlignment','center','FontWeight','bold','FontSize',15)
 text(-.3,0.5,'Park et al., 2020','Units','normalized','Rotation',90,'HorizontalAlignment','center','FontWeight','bold','FontSize',15)
 text(1.2,0,'N=52','Units','normalized','HorizontalAlignment','center','FontSize',12)
-text(1.1,1,sprintf('p=%.3f',round(originaldata_originalbinning(1).pval_omni_total,4)),'Units','normalized', 'BackgroundColor', 'w','VerticalAlignment','top','EdgeColor','k')
+text(1.1,1,sprintf('p<%.3f',round(originaldata_originalbinning(1).pval_omni_total,4)),'Units','normalized', 'BackgroundColor', 'w','VerticalAlignment','top','EdgeColor','k')
 
 text(-0.1, 1, 'a', 'Units','normalized', 'FontWeight','bold','FontSize',12)
 
@@ -97,7 +97,7 @@ subplot(3,3,2) % Original data bar plot
 mean_amps = reshape(cell2mat([arrayfun(@(x) nanmean(x.mean_amp_sumnorm,1), originaldata_originalbinning, 'UniformOutput', false)]), [], length(originaldata_originalbinning))';
 mean_amps = mean_amps(:, [4:6 1:3]);
 
-b = bar(mean(mean_amps,1),'k','FaceAlpha',0.2); 
+b = bar(mean(mean_amps,1),'k','FaceAlpha',0.2);
 hold on
 x_bar = b.XData ;
 errorbar(x_bar, mean(mean_amps,1),std(mean_amps,[],1)/sqrt(size(mean_amps,1)), 'k', 'linestyle', 'none','LineWidth',1);
@@ -105,7 +105,7 @@ ylim([-0.4 0.8]) % Force ylim to match Park et al. 2020 for easier comparison
 y_lim = get(gca,'ylim');
 sine_to_plot    = (range(y_lim)*.2)/2+y_lim(1)+((sine_wave+1)/2)*range(y_lim)*0.8;
 plot(sine_time,  sine_to_plot, '--k');
-text(0.05,0.965,sprintf('MI: p=%.3f',round(originaldata_originalbinning(1).pval_MI_total,4)),'Units','normalized', 'BackgroundColor', 'w','VerticalAlignment','top','EdgeColor','k')
+text(0.05,0.965,sprintf('MI: p<%.3f',round(originaldata_originalbinning(1).pval_MI_total,4)),'Units','normalized', 'BackgroundColor', 'w','VerticalAlignment','top','EdgeColor','k')
 
 text(0.5,1.2,'RP coupling: Original binning','Units','normalized','Rotation',0,'HorizontalAlignment','center','FontWeight','bold','FontSize',15)
 
@@ -126,7 +126,7 @@ errorbar(x_bar, mean(mean_amps,1),std(mean_amps,[],1)/sqrt(size(mean_amps,1)), '
 y_lim = get(gca,'ylim');
 sine_to_plot    = (range(y_lim)*.2)/2+y_lim(1)+((sine_wave+1)/2)*range(y_lim)*0.8;
 plot(sine_time,  sine_to_plot, '--k');
-text(0.05,0.965,sprintf('MI: p=%.3f',round(newdata_originalbinning(1).pval_MI_total,4)),'Units','normalized', 'BackgroundColor', 'w','VerticalAlignment','top','EdgeColor','k')
+text(0.05,0.965,sprintf('MI: p<%.3f',round(newdata_originalbinning(1).pval_MI_total,4)),'Units','normalized', 'BackgroundColor', 'w','VerticalAlignment','top','EdgeColor','k')
 
 xticks([1:6]);
 xticklabels({'0~60','','','','', '300~360'});
