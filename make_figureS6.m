@@ -313,4 +313,4 @@ text(-.15,0.5,'RP amplitude (μV)','Units','normalized','Rotation',90,'Horizonta
 
 text(-0.1, 1, 'i', 'Units','normalized', 'FontWeight','normal','FontSize',12)
 
-print(fig, '-dsvg', '-r300', 'figures\figure_1_scatter.svg', '-painters')
+print(fig, '-dsvg', '-r300', 'figures\figure_S6.svg', '-painters')
