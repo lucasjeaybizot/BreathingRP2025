@@ -40,7 +40,10 @@ load("results\original_binning\simulateddata_originalbinning.mat")
 
 %% Initialize figure layout
 fig = figure('Name','Figure 1', 'Position', [-1779          50        1380         946], 'Color','white');
+% Position for second screen (Used for final figure generation): [-1779          50        1380         946]
 % Position for main monitor:      [338          25        1380         946]
+% Position for remote second screen: [1681         131        1920
+% 955]
 
 %% Rose plots
 subplot(3,3,1) % Original data rose plot
@@ -49,15 +52,20 @@ individual_phases   = arrayfun(@(x) circ_mean(x.Resp_phase_press), originaldata_
 
 h = polarhistogram(total_phases,14,'FaceColor','k','FaceAlpha',0.2); hold on
 r = h.Parent.RLim(2);
-polarplot(individual_phases, (r)*ones(size(individual_phases)), 'o','MarkerSize',7, 'MarkerFaceColor', 'None', 'MarkerEdgeColor', 'k');
-polarplot(circ_mean(individual_phases'), (r)*ones(size(individual_phases)), 'o','MarkerSize',7, 'MarkerFaceColor', 'r', 'MarkerEdgeColor', 'r');
+ax = gca;
 
-text(0.5,1.2,'Behavioral coupling','Units','normalized','Rotation',0,'HorizontalAlignment','center','FontWeight','bold','FontSize',15)
-text(-.3,0.5,'Park et al., 2020','Units','normalized','Rotation',90,'HorizontalAlignment','center','FontWeight','bold','FontSize',15)
-text(1.2,0,'N=52','Units','normalized','HorizontalAlignment','center','FontSize',12)
-text(1.1,1,sprintf('p<%.3f',round(originaldata_originalbinning(1).pval_omni_total,4)),'Units','normalized', 'BackgroundColor', 'w','VerticalAlignment','top','EdgeColor','k')
+ax.FontSize = 5;              % global
+ax.ThetaAxis.FontSize = 5;    % angle labels
+ax.RAxis.FontSize = 5;        % radial labels
+polarplot(individual_phases, (r)*ones(size(individual_phases)), 'o','MarkerSize',4, 'MarkerFaceColor', 'None', 'MarkerEdgeColor', 'k');
+polarplot(circ_mean(individual_phases'), (r)*ones(size(individual_phases)), 'o','MarkerSize',4, 'MarkerFaceColor', 'r', 'MarkerEdgeColor', 'r');
 
-text(-0.1, 1, 'a', 'Units','normalized', 'FontWeight','bold','FontSize',12)
+text(0.5,1.2,'Behavioral coupling','Units','normalized','Rotation',0,'HorizontalAlignment','center','FontWeight','normal','FontSize',7)
+text(-.3,0.5,'Park et al., 2020','Units','normalized','Rotation',90,'HorizontalAlignment','center','FontWeight','normal','FontSize',7)
+text(1.2,0,'N=52','Units','normalized','HorizontalAlignment','center','FontSize',5)
+text(1,1,sprintf('p<%.3f',round(originaldata_originalbinning(1).pval_omni_total,4)),'Units','normalized','VerticalAlignment','top','FontSize',5)
+
+text(-0.1, 1, 'a', 'Units','normalized', 'FontWeight','normal','FontSize',5)
 
 subplot(3,3,4) % New data rose plot
 total_phases        = horzcat(newdata_correctedbinning.Resp_phase_press);
@@ -65,14 +73,19 @@ individual_phases   = arrayfun(@(x) circ_mean(x.Resp_phase_press'), newdata_corr
 
 h = polarhistogram(total_phases,14,'FaceColor','k','FaceAlpha',0.2); hold on
 r = h.Parent.RLim(2);
-polarplot(individual_phases, (r)*ones(size(individual_phases)), 'o','MarkerSize',7, 'MarkerFaceColor', 'None', 'MarkerEdgeColor', 'k');
-polarplot(circ_mean(individual_phases'), (r)*ones(size(individual_phases)), 'o','MarkerSize',7, 'MarkerFaceColor', 'r', 'MarkerEdgeColor', 'r');
+ax = gca;
 
-text(-.3,0.5,'New data','Units','normalized','Rotation',90,'HorizontalAlignment','center','FontWeight','bold','FontSize',15)
-text(1.2,0,'N=17','Units','normalized','HorizontalAlignment','center','FontSize',12)
-text(1.1,1,sprintf('p=%.3f',round(newdata_originalbinning(1).pval_omni_total,4)),'Units','normalized', 'BackgroundColor', 'w','VerticalAlignment','top','EdgeColor','k')
+ax.FontSize = 5;              % global
+ax.ThetaAxis.FontSize = 5;    % angle labels
+ax.RAxis.FontSize = 5;        % radial labels
+polarplot(individual_phases, (r)*ones(size(individual_phases)), 'o','MarkerSize',4, 'MarkerFaceColor', 'None', 'MarkerEdgeColor', 'k');
+polarplot(circ_mean(individual_phases'), (r)*ones(size(individual_phases)), 'o','MarkerSize',4, 'MarkerFaceColor', 'r', 'MarkerEdgeColor', 'r');
 
-text(-0.1, 1, 'd', 'Units','normalized', 'FontWeight','bold','FontSize',12)
+text(-.3,0.5,'New data','Units','normalized','Rotation',90,'HorizontalAlignment','center','FontWeight','normal','FontSize',7)
+text(1.2,0,'N=17','Units','normalized','HorizontalAlignment','center','FontSize',5)
+text(1,1,sprintf('p=%.3f',round(newdata_originalbinning(1).pval_omni_total,4)),'Units','normalized','VerticalAlignment','top','FontSize',5)
+
+text(-0.1, 1, 'd', 'Units','normalized', 'FontWeight','normal','FontSize',5)
 
 subplot(3,3,7) % Simulated data rose plot
 total_phases        = horzcat(simulateddata_correctedbinning.Resp_phase_press);
@@ -80,13 +93,18 @@ individual_phases   = arrayfun(@(x) circ_mean(x.Resp_phase_press'), simulateddat
 
 h = polarhistogram(total_phases,6,'FaceColor','k','FaceAlpha',0.2); hold on
 r = h.Parent.RLim(2);
-polarplot(individual_phases, (r)*ones(size(individual_phases)), 'o','MarkerSize',7, 'MarkerFaceColor', 'None', 'MarkerEdgeColor', 'k');
-polarplot(circ_mean(individual_phases'), (r)*ones(size(individual_phases)), 'o','MarkerSize',7, 'MarkerFaceColor', 'r', 'MarkerEdgeColor', 'r');
+ax = gca;
 
-text(-.3,0.5,'Simulated data','Units','normalized','Rotation',90,'HorizontalAlignment','center','FontWeight','bold','FontSize',15)
-text(1.2,0,'N=50','Units','normalized','HorizontalAlignment','center','FontSize',12)
+ax.FontSize = 5;              % global
+ax.ThetaAxis.FontSize = 5;    % angle labels
+ax.RAxis.FontSize = 5;        % radial labels
+polarplot(individual_phases, (r)*ones(size(individual_phases)), 'o','MarkerSize',4, 'MarkerFaceColor', 'None', 'MarkerEdgeColor', 'k');
+polarplot(circ_mean(individual_phases'), (r)*ones(size(individual_phases)), 'o','MarkerSize',4, 'MarkerFaceColor', 'r', 'MarkerEdgeColor', 'r');
 
-text(-0.1, 1, 'g', 'Units','normalized', 'FontWeight','bold','FontSize',12)
+text(-.3,0.5,'Simulated data','Units','normalized','Rotation',90,'HorizontalAlignment','center','FontWeight','normal','FontSize',7)
+text(1.2,0,'N=50','Units','normalized','HorizontalAlignment','center','FontSize',5)
+
+text(-0.1, 1, 'g', 'Units','normalized', 'FontWeight','normal','FontSize',5)
 
 %% Prep for bar plots
 sine_time = linspace(0,7,1000);
@@ -100,21 +118,24 @@ mean_amps = mean_amps(:, [4:6 1:3]);
 b = bar(mean(mean_amps,1),'k','FaceAlpha',0.2);
 hold on
 x_bar = b.XData ;
-errorbar(x_bar, mean(mean_amps,1),std(mean_amps,[],1)/sqrt(size(mean_amps,1)), 'k', 'linestyle', 'none','LineWidth',1);
+errorbar(x_bar, mean(mean_amps,1),std(mean_amps,[],1)/sqrt(size(mean_amps,1)), 'k', 'linestyle', 'none','LineWidth',0.5);
 ylim([-0.4 0.8]) % Force ylim to match Park et al. 2020 for easier comparison
 y_lim = get(gca,'ylim');
 sine_to_plot    = (range(y_lim)*.2)/2+y_lim(1)+((sine_wave+1)/2)*range(y_lim)*0.8;
 plot(sine_time,  sine_to_plot, '--k');
-text(0.05,0.965,sprintf('MI: p<%.3f',round(originaldata_originalbinning(1).pval_MI_total,4)),'Units','normalized', 'BackgroundColor', 'w','VerticalAlignment','top','EdgeColor','k')
+text(0.05,0.1,sprintf('MI: p<%.3f',round(originaldata_originalbinning(1).pval_MI_total,4)),'Units','normalized','VerticalAlignment','top','FontSize',5)
 
-text(0.5,1.2,'RP coupling: Original binning','Units','normalized','Rotation',0,'HorizontalAlignment','center','FontWeight','bold','FontSize',15)
+text(0.5,1.2,'RP coupling: Original binning','Units','normalized','Rotation',0,'HorizontalAlignment','center','FontWeight','normal','FontSize',7)
 
 xticks([1:6]);
 xticklabels({'0~60','','','','', '300~360'});
 xtickangle(0);
-text(-.15,0.5,'Normalized RP amplitude (μV)','Units','normalized','Rotation',90,'HorizontalAlignment','center','FontSize',12)
+text(-.15,0.5,'Normalized RP amplitude (μV)','Units','normalized','Rotation',90,'HorizontalAlignment','center','FontSize',5)
 
-text(-0.21, 1, 'b', 'Units','normalized', 'FontWeight','bold','FontSize',12)
+text(-0.21, 1, 'b', 'Units','normalized', 'FontWeight','normal','FontSize',7)
+
+set(gca,'FontSize',5)
+
 subplot(3,3,5) % New data bar plot
 mean_amps = reshape(cell2mat([arrayfun(@(x) nanmean(x.mean_amp_sumnorm,1), newdata_originalbinning, 'UniformOutput', false)]), [], length(newdata_originalbinning))';
 mean_amps = mean_amps(:, [4:6 1:3]);
@@ -122,18 +143,20 @@ mean_amps = mean_amps(:, [4:6 1:3]);
 b = bar(mean(mean_amps,1),'k','FaceAlpha',0.2); 
 hold on
 x_bar = b.XData ;
-errorbar(x_bar, mean(mean_amps,1),std(mean_amps,[],1)/sqrt(size(mean_amps,1)), 'k', 'linestyle', 'none','LineWidth',1);
+errorbar(x_bar, mean(mean_amps,1),std(mean_amps,[],1)/sqrt(size(mean_amps,1)), 'k', 'linestyle', 'none','LineWidth',0.5);
 y_lim = get(gca,'ylim');
 sine_to_plot    = (range(y_lim)*.2)/2+y_lim(1)+((sine_wave+1)/2)*range(y_lim)*0.8;
 plot(sine_time,  sine_to_plot, '--k');
-text(0.05,0.965,sprintf('MI: p<%.3f',round(newdata_originalbinning(1).pval_MI_total,4)),'Units','normalized', 'BackgroundColor', 'w','VerticalAlignment','top','EdgeColor','k')
+text(0.05,0.10,sprintf('MI: p<%.3f',round(newdata_originalbinning(1).pval_MI_total,4)),'Units','normalized','VerticalAlignment','top','FontSize',5)
 
 xticks([1:6]);
 xticklabels({'0~60','','','','', '300~360'});
 xtickangle(0);
-text(-.15,0.5,'Normalized RP amplitude (μV)','Units','normalized','Rotation',90,'HorizontalAlignment','center','FontSize',12)
+text(-.15,0.5,'Normalized RP amplitude (μV)','Units','normalized','Rotation',90,'HorizontalAlignment','center','FontSize',5)
 
-text(-0.21, 1, 'e', 'Units','normalized', 'FontWeight','bold','FontSize',12)
+text(-0.21, 1, 'e', 'Units','normalized', 'FontWeight','normal','FontSize',7)
+
+set(gca,'FontSize',5)
 
 subplot(3,3,8) % Simulated data bar plot
 mean_amps = reshape(cell2mat([arrayfun(@(x) nanmean(x.mean_amp_sumnorm,1), simulateddata_originalbinning, 'UniformOutput', false)]), [], length(simulateddata_originalbinning))';
@@ -142,7 +165,7 @@ mean_amps = mean_amps(:, [4:6 1:3]);
 b = bar(mean(mean_amps,1),'k','FaceAlpha',0.2); 
 hold on
 x_bar = b.XData ;
-errorbar(x_bar, mean(mean_amps,1),std(mean_amps,[],1)/sqrt(size(mean_amps,1)), 'k', 'linestyle', 'none','LineWidth',1);
+errorbar(x_bar, mean(mean_amps,1),std(mean_amps,[],1)/sqrt(size(mean_amps,1)), 'k', 'linestyle', 'none','LineWidth',0.5);
 y_lim = get(gca,'ylim');
 sine_to_plot    = (range(y_lim)*.2)/2+y_lim(1)+((sine_wave+1)/2)*range(y_lim)*0.8;
 plot(sine_time,  sine_to_plot, '--k');
@@ -150,9 +173,11 @@ plot(sine_time,  sine_to_plot, '--k');
 xticks([1:6]);
 xticklabels({'0~60','','','','', '300~360'});
 xtickangle(0);
-text(-.15,0.5,'Normalized RP amplitude (μV)','Units','normalized','Rotation',90,'HorizontalAlignment','center','FontSize',12)
+text(-.15,0.5,'Normalized RP amplitude (μV)','Units','normalized','Rotation',90,'HorizontalAlignment','center','FontSize',5)
 
-text(-0.21, 1, 'h', 'Units','normalized', 'FontWeight','bold','FontSize',12)
+text(-0.21, 1, 'h', 'Units','normalized', 'FontWeight','normal','FontSize',7)
+
+set(gca,'FontSize',5)
 
 %% Corrected binning bar plots
 subplot(3,3,3) % Original data bar plot
@@ -162,27 +187,29 @@ mean_amps = mean_amps(:, [4:6 1:3]);
 b = bar(mean(mean_amps,1),'k','FaceAlpha',0.2); 
 hold on
 x_bar = b.XData ;
-errorbar(x_bar, mean(mean_amps,1),std(mean_amps,[],1)/sqrt(size(mean_amps,1)), 'k', 'linestyle', 'none','LineWidth',1);
+errorbar(x_bar, mean(mean_amps,1),std(mean_amps,[],1)/sqrt(size(mean_amps,1)), 'k', 'linestyle', 'none','LineWidth',0.5);
 lowsem =  mean(mean_amps,1)-std(mean_amps,[],1)/sqrt(size(mean_amps,1));
 sine_to_plot = -1.1*max(abs(mean(lowsem,1)))+((sine_wave+1)/2) * 1.2 * abs(max(abs(mean(lowsem,1))));
 plot(sine_time,  sine_to_plot, '--k');
-text(0.05,0.965,sprintf('MI: p=%.3f',round(originaldata_correctedbinning(1).pval_MI_total,4)),'Units','normalized', 'BackgroundColor', 'w','VerticalAlignment','top','EdgeColor','k')
+text(0.05,0.1,sprintf('MI: p=%.3f',round(originaldata_correctedbinning(1).pval_MI_total,4)),'Units','normalized','VerticalAlignment','top','FontSize',5)
 
-text(0.5,1.2,'RP coupling: Corrected binning','Units','normalized','Rotation',0,'HorizontalAlignment','center','FontWeight','bold','FontSize',15)
+text(0.5,1.2,'RP coupling: Corrected binning','Units','normalized','Rotation',0,'HorizontalAlignment','center','FontWeight','normal','FontSize',7)
 
 xticks([1:6]);
 xticklabels({'0~60','','','','', '300~360'});
 xtickangle(0);
 ylim([min(sine_to_plot)-(.1*range(sine_to_plot)) max(sine_to_plot)+(.1*range(sine_to_plot))])
 
-annotation('arrow', [0.92 0.92], [50/60 55/60], 'Units', 'normalized','LineStyle', '--','HeadStyle','vback3');
-annotation('arrow', [0.92 0.92], [48/60 43/60], 'Units', 'normalized','LineStyle', '--','HeadStyle','vback3');
-text(1.1, 0.6, 'Inspiration', 'Rotation',90, 'Units', 'normalized')
-text(1.1, 0.1, 'Expiration', 'Rotation',90, 'Units', 'normalized')
+annotation('arrow', [0.92 0.92], [50/60 55/60], 'Units', 'normalized','LineStyle', '--','HeadStyle','vback3','LineWidth',0.5,'HeadWidth',5,'HeadLength',5);
+annotation('arrow', [0.92 0.92], [48/60 43/60], 'Units', 'normalized','LineStyle', '--','HeadStyle','vback3','LineWidth',0.5,'HeadWidth',5,'HeadLength',5);
+text(1.12, 0.6, 'Inspiration', 'Rotation',90, 'Units', 'normalized','FontSize',5)
+text(1.12, 0.1, 'Expiration', 'Rotation',90, 'Units', 'normalized','FontSize',5)
 
-text(-.15,0.5,'RP amplitude (μV)','Units','normalized','Rotation',90,'HorizontalAlignment','center','FontSize',12)
+text(-.15,0.5,'RP amplitude (μV)','Units','normalized','Rotation',90,'HorizontalAlignment','center','FontSize',5)
 
-text(-0.1, 1, 'c', 'Units','normalized', 'FontWeight','bold','FontSize',12)
+text(-0.1, 1, 'c', 'Units','normalized', 'FontWeight','normal','FontSize',7)
+
+set(gca,'FontSize',5)
 
 subplot(3,3,6); % New data bar plot
 mean_amps = reshape([newdata_correctedbinning.mean_amp], [], length(newdata_correctedbinning))';
@@ -191,25 +218,27 @@ mean_amps = mean_amps(:, [4:6 1:3]);
 b = bar(mean(mean_amps,1),'k','FaceAlpha',0.2); 
 hold on
 x_bar = b.XData ;
-errorbar(x_bar, mean(mean_amps,1),std(mean_amps,[],1)/sqrt(size(mean_amps,1)), 'k', 'linestyle', 'none','LineWidth',1);
+errorbar(x_bar, mean(mean_amps,1),std(mean_amps,[],1)/sqrt(size(mean_amps,1)), 'k', 'linestyle', 'none','LineWidth',0.5);
 lowsem =  mean(mean_amps,1)-std(mean_amps,[],1)/sqrt(size(mean_amps,1));
 sine_to_plot = -1.1*max(abs(mean(lowsem,1)))+((sine_wave+1)/2) * 1.2 * abs(max(abs(mean(lowsem,1))));
 plot(sine_time,  sine_to_plot, '--k');
-text(0.05,0.965,sprintf('MI: p=%.3f',round(newdata_correctedbinning(1).pval_MI_total,4)),'Units','normalized', 'BackgroundColor', 'w','VerticalAlignment','top','EdgeColor','k')
+text(0.05,0.1,sprintf('MI: p=%.3f',round(newdata_correctedbinning(1).pval_MI_total,4)),'Units','normalized','VerticalAlignment','top','FontSize',5)
 
 xticks([1:6]);
 xticklabels({'0~60','','','','', '300~360'});
 xtickangle(0);
 ylim([min(sine_to_plot)-(.1*range(sine_to_plot)) max(sine_to_plot)+(.1*range(sine_to_plot))])
 
-annotation('arrow', [0.92 0.92], [50/60 55/60]-18/60, 'Units', 'normalized','LineStyle', '--','HeadStyle','vback3');
-annotation('arrow', [0.92 0.92], [48/60 43/60]-18/60, 'Units', 'normalized','LineStyle', '--','HeadStyle','vback3');
-text(1.1, 0.6, 'Inspiration', 'Rotation',90, 'Units', 'normalized')
-text(1.1, 0.1, 'Expiration', 'Rotation',90, 'Units', 'normalized')
+annotation('arrow', [0.92 0.92], [50/60 55/60]-18/60, 'Units', 'normalized','LineStyle', '--','HeadStyle','vback3','LineWidth',0.5,'HeadWidth',5,'HeadLength',5);
+annotation('arrow', [0.92 0.92], [48/60 43/60]-18/60, 'Units', 'normalized','LineStyle', '--','HeadStyle','vback3','LineWidth',0.5,'HeadWidth',5,'HeadLength',5);
+text(1.12, 0.6, 'Inspiration', 'Rotation',90, 'Units', 'normalized','FontSize',5)
+text(1.12, 0.1, 'Expiration', 'Rotation',90, 'Units', 'normalized','FontSize',5)
 
-text(-.15,0.5,'RP amplitude (μV)','Units','normalized','Rotation',90,'HorizontalAlignment','center','FontSize',12)
+text(-.15,0.5,'RP amplitude (μV)','Units','normalized','Rotation',90,'HorizontalAlignment','center','FontSize',5)
 
-text(-0.1, 1, 'f', 'Units','normalized', 'FontWeight','bold','FontSize',12)
+text(-0.1, 1, 'f', 'Units','normalized', 'FontWeight','normal','FontSize',7)
+
+set(gca,'FontSize',5)
 
 subplot(3,3,9) % Simulated data bar plot
 mean_amps = reshape([simulateddata_correctedbinning.mean_amp], [], length(simulateddata_correctedbinning))';
@@ -218,7 +247,7 @@ mean_amps = mean_amps(:, [4:6 1:3]);
 b = bar(mean(mean_amps,1),'k','FaceAlpha',0.2); 
 hold on
 x_bar = b.XData ;
-errorbar(x_bar, mean(mean_amps,1),std(mean_amps,[],1)/sqrt(size(mean_amps,1)), 'k', 'linestyle', 'none','LineWidth',1);
+errorbar(x_bar, mean(mean_amps,1),std(mean_amps,[],1)/sqrt(size(mean_amps,1)), 'k', 'linestyle', 'none','LineWidth',0.5);
 lowsem =  mean(mean_amps,1)-std(mean_amps,[],1)/sqrt(size(mean_amps,1));
 sine_to_plot = -1.1*max(abs(mean(lowsem,1)))+((sine_wave+1)/2) * 1.2 * abs(max(abs(mean(lowsem,1))));
 plot(sine_time,  sine_to_plot, '--k');
@@ -227,13 +256,34 @@ xticklabels({'0~60','','','','', '300~360'});
 xtickangle(0);
 ylim([min(sine_to_plot)-(.1*range(sine_to_plot)) max(sine_to_plot)+(.1*range(sine_to_plot))])
 
-annotation('arrow', [0.92 0.92], [50/60 55/60]-36/60, 'Units', 'normalized','LineStyle', '--','HeadStyle','vback3');
-annotation('arrow', [0.92 0.92], [48/60 43/60]-36/60, 'Units', 'normalized','LineStyle', '--','HeadStyle','vback3');
-text(1.1, 0.6, 'Inspiration', 'Rotation',90, 'Units', 'normalized')
-text(1.1, 0.1, 'Expiration', 'Rotation',90, 'Units', 'normalized')
+annotation('arrow', [0.92 0.92], [50/60 55/60]-36/60, 'Units', 'normalized','LineStyle', '--','HeadStyle','vback3','LineWidth',0.5,'HeadWidth',5,'HeadLength',5);
+annotation('arrow', [0.92 0.92], [48/60 43/60]-36/60, 'Units', 'normalized','LineStyle', '--','HeadStyle','vback3','LineWidth',0.5,'HeadWidth',5,'HeadLength',5);
+text(1.12, 0.6, 'Inspiration', 'Rotation',90, 'Units', 'normalized','FontSize',5)
+text(1.12, 0.1, 'Expiration', 'Rotation',90, 'Units', 'normalized','FontSize',5)
 
-text(-.15,0.5,'RP amplitude (μV)','Units','normalized','Rotation',90,'HorizontalAlignment','center','FontSize',12)
+text(-.15,0.5,'RP amplitude (μV)','Units','normalized','Rotation',90,'HorizontalAlignment','center','FontSize',5)
 
-text(-0.1, 1, 'i', 'Units','normalized', 'FontWeight','bold','FontSize',12)
+text(-0.1, 1, 'i', 'Units','normalized', 'FontWeight','normal','FontSize',7)
 
-print(fig, '-dsvg', '-r300', 'figures\figure_1.svg', '-painters')
+set(gca,'FontSize',5)
+
+% print(fig, '-dsvg', '-r300', 'figures\figure_1.svg', '-painters')
+
+%% 
+% Desired size
+width_mm  = 180;
+height_mm = 120;
+
+% Convert mm → inches (MATLAB uses inches internally)
+width_in  = width_mm  / 25.4;
+height_in = height_mm / 25.4;
+
+set(fig, 'Units', 'inches', 'Position', [1 1 width_in height_in]);
+
+% Critical: set print properties
+set(fig, 'PaperUnits', 'inches');
+set(fig, 'PaperPosition', [0 0 width_in height_in]);
+set(fig, 'PaperSize', [width_in height_in]);
+
+% Save
+print(fig, 'figures\figure_1.svg', '-dsvg', '-r300', '-painters');
